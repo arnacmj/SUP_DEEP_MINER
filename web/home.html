@@ -1,0 +1,320 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/responsive.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.3/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript" src="js/config.js"></script>
+<!--<script type="text/javascript" src="js/script.js"></script>-->
+
+</head>
+<body>
+<!-- PAGE CONTENT START -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <h3 class="text-uppercase">News</h3>
+            <p>Dec 3, 2017 - Third exchange for SuperiorCoin!! <a href="https://btc-alpha.com/exchange/SUP_BTC/">BTC-Alpha</a></p>
+            <p>Nov 24, 2017 - New Fork coming up on Nov 24th to V11.01 Fork V6, Please update daemon before block 101,000 <a href="https://the-superior-coin.com/Downloads/SuperiorCoin.zip">Download</a></p>
+            <p>Nov 14, 2017 - Second exchange for SuperiorCoin!! <a href="https://stocks.exchange/trade/SUP/BTC">Stocks.exchange</a></p>
+            <p>Oct 17, 2017 - New exchange for SuperiorCoin!! <a href="https://www.southxchange.com/Market/Book/SUP/BTC">SouthXchange</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="well npmData">
+            <h3 class="text-uppercase">Our Network</h3>
+            <ul>
+                <li><b><i class="fa fa-tachometer"></i> Hash Rate: </b><span id="networkHashrate"></span></li>
+                <li><b><i class="fa fa-clock-o"></i> Block Found: </b><span id="networkLastBlockFound"></span></li>
+                <li><b><i class="fa fa-unlock-alt"></i> Difficulty: </b><span id="networkDifficulty"></span></li>
+                <li><b><i class="fa fa-bars"></i> Blockchain Height: </b><span id="blockchainHeight"></span></li>
+                <li><b><i class="fa fa-money"></i> Last Reward: </b><span id="networkLastReward"></span></li>
+                <li><b><i class="fa fa-paw"></i> Last Hash: </b><a id="lastHash" target="_blank"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="well npmData">
+            <h3 class="text-uppercase">Our Pool</h3>
+            <ul>
+                <li><b><i class="fa fa-tachometer"></i> Hash Rate: </b><span id="poolHashrate"></span></li>
+                <li><b><i class="fa fa-clock-o"></i> Block Found: </b><span id="poolLastBlockFound"></span></li>
+                <li><b><i class="fa fa-users"></i> Connected Miners: </b><span id="poolMiners"></span></li>
+                <li><b><i class="fa fa-gift"></i> Donations: </b><span id="poolDonations"></span></li>
+                <li><b><i class="fa fa-money"></i> Total Pool Fee: </b><span id="poolFee"></span></li>
+                <li><b><i class="fa fa-history"></i> Block Found Every: </b><span id="blockSolvedTime"></span> (est.)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="well npmData">
+            <h3 class="text-uppercase">Market</h3>
+            <ul>
+                <li><b>SUP:</b>&nbsp;<span id="southXchangeBTC"></span>&nbsp;BTC<br>
+                <small>Powered by <a href="https://www.southxchange.com/Market/Book/SUP/BTC" target="_blank">SouthXchange</a></small><br></li>
+
+                <li><b>SUP:</b>&nbsp;<span id="stocksExchangeBTC"></span>&nbsp;BTC<br>
+                <small>Updated:&nbsp;<span id="stocksExchangeUpdateTime"></span>&nbsp;minutes ago</small><br>
+                <small>Powered by <a href="https://stocks.exchange/trade/SUP/BTC" target="_blank">Stocks Exchange</a></small><br></li>
+
+                <li><b>BTC ALPHA</b>&nbsp;<span id="btcAlphaBTC"></span>&nbsp;BTC<br>
+                <small>Powered by <a href="https://btc-alpha.com/exchange/SUP_BTC/" target="_blank">BTC Alpha</a></small><br></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <h1>Welcome to the SuperiorCoin Mining Pool!</h1>
+            <h3>Why should you mine SuperiorCoin?</h3>
+            <ul id="supMiningList">
+                <li>Two minute Block Time</li>
+                <li>Untraceable Payments</li>
+                <li>Low Fees</li>
+                <li>Heavier Encryption</li>
+                <li>ASIC Resistant</li>
+                <li>Opaque Blockchain</li>
+                <li>Blockchain Analysis Resistance</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <div id="miningProfitCalc">
+                <h3>Estimate Mining Profits</h3>
+                <div id="calcHashHolder">
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="calcHashRate" placeholder="Enter Your Hash Rate">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="calcHashDropdown">
+                                    <span id="calcHashUnit" data-mul="1">KH/s</span> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu" id="calcHashUnits">
+                                    <li><a href="#" data-mul="0">H/s</a></li>
+                                    <li><a href="#" data-mul="1">KH/s</a></li>
+                                    <li><a href="#" data-mul="2">MH/s</a></li>
+                                </ul>
+                            </div>
+                            <span class="input-group-addon">=</span>
+                            <span class="input-group-addon" id="calcHashResultsHolder"><span id="calcHashAmount"></span> <span id="calcHashSymbol"></span>/day</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="newAdd" class="btn text-uppercase" data-toggle="modal" data-target="#addModal" >+ New Address</button>
+                        <div id="addModal" class="modal fade" role="dialog">
+
+                             <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color:#2d4253; color: #fff;">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h2 class="modal-title">Offline Wallet Generator</h2>
+                                    </div>
+                                    <div id="walletGenerator" class="modal-body"></div>
+                                    <div class="modal-footer" style="background-color:#2d4253;">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <div class="stats">
+                <h3>Your Stats & Payment History</h3>
+                <?php //echo $_GET['address']; ?>
+                <div class="input-group">
+                    <input class="form-control" id="yourStatsInput" type="text" placeholder="Enter Your Address" style="height:36px;" value="">
+                    <span class="input-group-btn"><button class="btn btn-default" type="button" onclick="void(0)" id="lookUp">
+                        <span><i class="fa fa-search"></i> Lookup</span>
+                        <span><i class="fa fa-refresh fa-spin"></i> Searching...</span>
+                    </button></span>
+                </div>
+
+                <div id="addressError"></div>
+                <div class="yourStats"><i class="fa fa-key"></i> Address: <span id="yourAddressDisplay"></span></div>
+                <div class="yourStats"><i class="fa fa-bank"></i> Pending Balance: <span id="yourPendingBalance"></span></div>
+                <div class="yourStats"><i class="fa fa-money"></i> Total Paid: <span id="yourPaid"></span></div>
+                <div class="yourStats"><i class="fa fa-clock-o"></i> Last Share Submitted: <span id="yourLastShare"></span></div>
+                <div class="yourStats"><i class="fa fa-tachometer"></i> Hash Rate: <span id="yourHashrateHolder"></span></div>
+                <div class="yourStats"><i class="fa fa-cloud-upload"></i> Total Hashes Submitted: <span id="yourHashes"></span></div>
+
+                <br class="yourStats">
+
+                <h4 class="yourStats">Payments</h4>
+                <div class="yourStats table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th><i class="fa fa-clock-o"></i> Time Sent</th>
+                            <th><i class="fa fa-paw"></i> Transaction Hash</th>
+                            <th><i class="fa fa-money"></i> Amount</th>
+                            <th><i class="fa fa-sitemap"></i> Mixin</th>
+                        </tr>
+                        </thead>
+                        <tbody id="payments_rows">
+
+                        </tbody>
+                    </table>
+                </div>
+                <p class="yourStats text-center">
+                    <button type="button" class="btn btn-default" id="loadMorePayments">Load More</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body> 
+
+
+
+<!-- PAGE CONTENT END -->
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/data.js"></script>
+
+<script type="text/javascript">
+// $(document).ready(function(){
+
+//     var address = "<?php echo $_GET['address'];?>";
+
+//     if($("#yourStatsInput").val(address)) {
+
+//         setTimeout(() => {
+//             document.getElementById("lookUp").click(setUpStats);
+//         },1000);
+        
+//     }
+
+// });    
+</script>
+
+<script type="text/javascript" src="js/home.js"></script>
+
+<style type="text/css">
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+    margin-right: 10px;
+}
+
+.marketFooter{
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+#networkLastReward{
+    text-transform: uppercase;
+}
+
+#lastHash{
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.8em;
+}
+
+#poolDonations{
+    font-size: 0.75em;
+}
+
+#miningProfitCalc{
+    margin: 35px 0;
+}
+
+#calcHashDropdown{
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+#calcHashHolder {
+    max-width: 100%;
+}
+
+#calcHashHolder .input-group {
+    margin-bottom: 10px;
+}
+
+
+#calcHashRate{
+    z-index: inherit;
+    font-family: 'Inconsolata', monospace;
+}
+
+#calcHashAmount{
+    font-family: 'Inconsolata', monospace;
+}
+
+#calcHashResultsHolder{
+    min-width: 145px;
+    max-width: 145px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.yourStats{
+    display: none;
+    margin: 10px 0;
+}
+
+#yourStatsInput{
+    z-index: inherit;
+    font-family: 'Inconsolata', monospace;
+}
+
+#yourAddressDisplay > span {
+    font-family: 'Inconsolata', monospace;
+}
+
+#lookUp > span:nth-child(2){
+    display: none;
+}
+
+#yourAddressDisplay{
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.9em;
+}
+#addressError{
+    color: red;
+}
+
+#payments_rows > tr > td{
+    vertical-align: middle;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.95em;
+    text-align: center;
+}
+#payments_rows > tr > td:nth-child(2){
+    text-align: left;
+}
+</style>
+</html>

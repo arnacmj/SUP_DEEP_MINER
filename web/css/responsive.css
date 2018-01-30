@@ -1,0 +1,57 @@
+@media screen and (max-width: 768px) {
+
+	#miningInput {
+		margin: 20px 0;
+	} 
+
+	#stickyOpen .onlineSupport {
+		display: none;
+	} 
+
+	#newAdd {
+		margin: 10px 0;
+	}
+
+	.input-group-btn:last-child>.btn, 
+	.input-group-btn:last-child>.btn-group {
+		z-index: 0 !important;
+	}
+
+	.modal-dialog {
+  		max-width: 98%;
+  	}	 
+
+	#calcHashHolder .col-md-10, 
+	#calcHashHolder .col-md-2 {
+	  padding: 0;
+	}
+
+	ul#walletSteps li p img {
+	  max-width: 500px;
+	  width: 100%;
+	}
+
+}	
+
+@media screen and (max-width: 414px) {
+
+	#stickyCon {
+		position: absolute;
+		top: 5px;
+		right: 0;
+	}
+
+	#stickyCon img {
+		max-width: 35px;
+	}
+
+	#stickyCon img:hover {
+		max-width: 40px;
+	}
+
+	ul#walletSteps li p img {
+	  max-width: 300px;
+	  width: 100%;
+	}	
+
+}	

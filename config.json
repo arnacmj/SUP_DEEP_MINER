@@ -1,9 +1,9 @@
 {
     "lhost": "127.0.0.1",
-    "lport": 7777,
-    "domain": "digxmr.com",
-    "pool": "pool.elitexmr.com:8080",
-    "addr": "41ynfGBUDbGJYYzz2jgSPG5mHrHJL4iMXEKh9EX6RfEiM9JuqHP66vuS2tRjYehJ3eRSt7FfoTdeVBfbvZ7Tesu1LKxioRU",
+    "lport": 7575,
+    "domain": "13.91.59.2",
+    "pool": "superiorcoinpool.com:3333",
+    "addr": "5QaiHzo64sLDo42ky98uXtJ3zswCdpUrk1q5nSidtqovjjiC7FmxRt84Zu3HkpYQX1PLDU72aQMK6Cif4muRxwt3RyZXY6y",
     "pass": "",
 	"key": "",
 	"cert": ""

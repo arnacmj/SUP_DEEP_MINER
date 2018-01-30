@@ -1,0 +1,258 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/responsive.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.3/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>    
+
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/script.js"></script>  
+
+</head>
+<body>
+<!-- PAGE CONTENT START-->     
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <h3>Connection Details</h3>
+            <div class="stats">
+                <i class="fa fa-cloud"></i> <b>Mining Pool Address:</b> <span id="miningPoolHost"></span>
+            </div>
+        </div>    
+    </div>
+
+    <div class="col-md-12">                
+        <div class="well" style="font-size:24px; font-weight:500; background-color:#faebd7;">Mining Ports <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
+        <div id="miningPorts" class="row">
+            <div class="stats col-md-3">
+                <div class="well">
+                    <i class="fa fa-tachometer"></i> <b>Port:</b> <span class="miningPort"></span><br>
+                    <i class="fa fa-unlock-alt"></i> <b>Starting Difficulty:</b> <span class="miningPortDiff"></span><br>
+                    <i class="fa fa-question"></i> <b>Description:</b> <span class="miningPortDesc"></span><br>
+                </div>    
+            </div>
+        </div>  
+    </div>
+
+    <div class="col-md-12">
+        <div class="well"> 
+            <h3>For <i class="fa fa-windows"></i> Windows users new to mining</h3>
+            <p class="getting_started_windows">
+                You can <a class="btn btn-default btn-sm" target="_blank" id="easyminer_link"><i class="fa fa-download"></i> Download</a>
+                and run <a target="_blank" href="https://github.com/zone117x/cryptonote-easy-miner">cryptonote-easy-miner</a> <i class="fa fa-github"></i>which will automatically generate your wallet address and run CPUMiner with the proper parameters.
+            </p>
+            <h3>How to create a Superior Coin wallet and mine Superior Coin with MinerGate</h3>
+            <ul id="walletSteps">
+                <li>Download and uncompress the PC wallet <a href="http://the-superior-coin.com/Downloads/SuperiorCoin.zip">SuperiorCoin.zip</a> (Valid as at 14-Aug-2017).</li>
+                <li>
+                    <p>Go to the folder where you installed Superior Coin and run the program SuperiorCoin.exe.</p>
+                    <p><img src="images/SuperiorCoinExe.png"></p>
+                </li>
+                <li>
+                    <p>Select your language.</p>
+                    <p><img src="images/SelectLanguage.png"></p>
+                </li>    
+                <li>
+                    <p>Click "Create a new wallet".</p>
+                    <p><img src="images/CreateWallet.png"></p>
+                </li>
+                <li>
+                    <p>Enter wallet name and copy the seed words and then click right</p>
+                    <p><img src="images/MnemonicSeed.png"></p>
+
+                    <b>IMPORTANT NOTICE</b><br>
+                    <em>Store these seed words in a safe place as you will need them if you ever need to recover your wallet.<br> 
+                    If you lose these seed words you can not recover your wallet and the coins in the wallet are lost.</em><br>
+                </li>
+                <li>
+                    <p>Enter wallet name again and paste the seed words and then click right</p>
+                    <p><p><img src="images/MnemonicSeed.png"></p>    
+                </li>
+                <li>
+                    <p>Enter and confirm wallet password and then click right</p>
+                    <p><img src="images/WalletPassword.png"></p>
+                </li>
+                <li>
+                    <p>Click "USE SUPERIOR"</p>
+                    <p><img src="images/UseSuperior.png"></p>
+                </li>
+                <li>
+                    <p>Superior Coin wallet will sync the blockchain</p>
+                    <p><img src="images/BlockSynchronization.png"></p>
+                </li>
+                <li>
+                    <p>Superior Coin wallet is synced and ready to use</p>
+                    <p><img src="images/SynchedWallet.png"></p>
+                </li>
+            </ul>    
+        </div>    
+    </div>
+
+   <div class="col-md-12">
+        <div class="well">  
+            <h3>Wallet & Daemon Software</h3>
+            <ul>
+                <li><a target="_blank" href="http://superior-coin.com/">Getting started with SuperiorCoin</a></li>
+                <li>SuperiorCoin information and news on its <a href="https://www.facebook.com/groups/superiorcoinmining">Facebook mining group</a></li>
+            </ul>
+        </div>    
+    </div>
+
+    <div class="col-md-12">
+        <div class="well">        
+            <h3>Mining Apps</h3>
+            <div class="yourStats table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th><i class="fa fa-book"></i> App Name</th>
+                        <th><i class="fa fa-car"></i> Architecture</th>
+                        <th><i class="fa fa-download"></i> Downloads</th>
+                        <th><i class="fa fa-comments"></i> Discussion</th>
+                        <th><i class="fa fa-file-code-o"></i> Source Code</th>
+                    </tr>
+                    </thead>
+                    <tbody id="mining_apps">
+                    <tr>
+                        <td class="miningAppTitle">CPUMiner (forked by LucasJones & Wolf)</td>
+                        <td>CPU</td>
+                        <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=632724">BitcoinTalk</a></td>
+                        <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=632724">BitcoinTalk</a></td>
+                        <td><a target="_blank" href="https://github.com/wolf9466/cpuminer-multi">Github</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <span>Example:</span>
+                            <code>minerd -a cryptonight -o stratum+tcp://<span class="exampleHost"></span>:<span class="examplePort"></span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="miningAppTitle">YAM Miner (by yvg1900)</td>
+                        <td>CPU</td>
+                        <td><a target="_blank" href="https://mega.co.nz/#F!UlkU0RyR!E8n4CFkqVu0WoOnsJnQkSg">MEGA</a></td>
+                        <td><a target="_blank" href="https://twitter.com/yvg1900">Twitter</a></td>
+                        <td>Proprietary <i class="fa fa-frown-o"></i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <span>Example:</span>
+                            <code>yam -c x -M stratum+tcp://<span class="exampleAddress">YOUR_WALLET_ADDRESS</span>:x@<span class="exampleHost"></span>:<span class="examplePort"></span>/xmr</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="miningAppTitle">Claymore CPU Miner</td>
+                        <td>CPU</td>
+                        <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=647251.0">BitcoinTalk</a></td>
+                        <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=647251.0">BitcoinTalk</a></td>
+                        <td>Proprietary <i class="fa fa-frown-o"></i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <span>Example:</span>
+                            <code>NsCpuCNMiner64 -o stratum+tcp://<span class="exampleHost"></span>:<span class="examplePort"></span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="miningAppTitle">Claymore GPU Miner</td>
+                        <td>OpenCL (AMD)</td>
+                        <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=638915.0">BitcoinTalk</a></td>
+                        <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=638915.0">Discussion</a></td>
+                        <td>Proprietary <i class="fa fa-frown-o"></i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <span>Example:</span>
+                            <code>NsGpuCNMiner -o stratum+tcp://<span class="exampleHost"></span>:<span class="examplePort"></span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="miningAppTitle">ccminer (forked by tsiv)</td>
+                        <td>CUDA (Nvidia)</td>
+                        <td><a target="_blank" href="https://github.com/tsiv/ccminer-cryptonight/releases">Github</a></td>
+                        <td><a target="_blank" href="https://bitcointalk.org/index.php?topic=656841.msg7487737#msg7487737">BitcoinTalk</a></td>
+                        <td><a target="_blank" href="https://github.com/tsiv/ccminer-cryptonight">Github</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <span>Example:</span>
+                            <code>ccminer -o stratum+tcp://<span class="exampleHost"></span>:<span class="examplePort"></span> -u <span class="exampleAddress">YOUR_WALLET_ADDRESS</span> -p x</code>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>  
+</div><!-- row -->  
+<!-- PAGE CONTENT START-->
+
+</body>
+
+<script type="text/javascript" src="js/data.js"></script>    
+<script type="text/javascript" src="js/getting-started.js"></script> 
+<style type="text/css">
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+    margin-right: 10px;
+}
+
+#miningPorts > .stats{
+    line-height: 3;
+}
+
+#miningPorts > .stats:last-child{
+    margin-right: 0;
+}
+
+.getting_started_windows{
+    line-height: 40px;
+}
+
+#getting_started_list > li{
+    margin-bottom: 20px;
+}
+
+#mining_apps > tr:first-child > td{
+    padding-top: 35px;
+}
+
+#mining_apps > tr > td{
+    border-top: none;
+}
+
+#mining_apps > tr:nth-child(even) > td{
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 20px;
+}
+
+#mining_apps > tr:nth-child(odd) > td{
+    padding-top: 20px;
+}
+
+#mining_apps{
+    margin-top: 10px;
+}
+
+.miningAppTitle{
+    font-weight: bold;
+}
+
+.exampleAddress{
+    font-style: italic;
+}
+
+#cpuminer_code{
+    display: inline-block;
+    white-space: normal;
+}
+</style> 
+</html>

@@ -1,0 +1,104 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.3/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>    
+
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/script.js"></script> 
+</head>
+<body>
+<!-- PAGE CONTENT START-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <h3 class="text-uppercase">News</h3>
+            <p>Dec 3, 2017 - Third exchange for SuperiorCoin!! <a href="https://btc-alpha.com/exchange/SUP_BTC/">BTC-Alpha</a></p>
+            <p>Nov 24, 2017 - New Fork coming up on Nov 24th to V11.01 Fork V6, Please update daemon before block 101,000 <a href="https://the-superior-coin.com/Downloads/SuperiorCoin.zip">Download</a></p>
+            <p>Nov 14, 2017 - Second exchange for SuperiorCoin!! <a href="https://stocks.exchange/trade/SUP/BTC">Stocks.exchange</a></p>
+            <p>Oct 17, 2017 - New exchange for SuperiorCoin!! <a href="https://www.southxchange.com/Market/Book/SUP/BTC">SouthXchange</a></p>
+        </div>    
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <div class="blocksStatHolder">
+                <span class="bg-primary">Total Blocks Mined: <span id="blocksTotal"></span></span>
+                <span class="bg-info">Maturity Depth Requirement: <span id="blocksMaturityCount"></span></span>
+            </div>
+        </div>
+    </div>        
+</div>  
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th><i class="fa fa-bars"></i> Height</th>
+                        <th title="How many more blocks network must mine before this block is matured"><i class="fa fa-link"></i> Maturity</th>
+                        <th><i class="fa fa-unlock-alt"></i> Difficulty</th>
+                        <th><i class="fa fa-paw"></i> Block Hash</th>
+                        <th><i class="fa fa-clock-o"></i> Time Found</th>
+                        <th><i class="fa fa-star-half-o"></i> Luck</th>
+                    </tr>
+                    </thead>
+                    <tbody id="blocks_rows">
+
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-center"><button type="button" class="btn btn-default" id="loadMoreBlocks">Load More</button></p>
+        </div>
+    </div>        
+</div>    
+<!-- PAGE CONTENT END-->
+</body>
+    
+<script type="text/javascript" src="js/data.js"></script>      
+<script type="text/javascript" src="js/pool-blocks.js"></script>   
+<style type="text/css">
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+    margin-right: 10px;
+}
+
+
+.blocksStatHolder > span{
+  display: inline-block;
+  border-radius: 5px;
+  padding: 1px 9px;
+  border: 1px solid #e5e5e5;
+  margin: 2px;
+}
+
+#blocks_rows > tr > td{
+  vertical-align: middle;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.95em;
+  padding: 8px 8px 8px 34px;
+}
+
+.luckGood{
+  color: darkgreen;
+}
+
+.luckBad{
+  color: darkred;
+}
+</style>
+</html>
+
+

