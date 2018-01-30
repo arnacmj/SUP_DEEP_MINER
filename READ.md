@@ -1,0 +1,1 @@
+Superiorcoin deep_miner
